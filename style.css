@@ -3,18 +3,37 @@
     padding: 0;
     box-sizing: border-box;
 }
-@font-face {
-    font-family: Comfortaa;
-    src: url(res/Comfortaa.ttf);
-}
 body,button,input {
     font-family: 'Comfortaa', cursive;
 }
 .title {
     padding: 1rem;
     background:linear-gradient(to bottom right,#72147E,#F21170);
-    text-align: center;
     margin: 2vh auto;
     width: 30%;
     border-radius: 28% 72% 61% 39% / 49% 52% 48% 51% ;
+}
+.todos_title {
+    margin-top: 5vh;
+    text-align: center;
+    font-weight: 900;
+    font-size: 2rem;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 700,
+  'GRAD' 200,
+  'opsz' 48
+}
+.add_btn {
+    padding: 1rem;
+    background:linear-gradient(to right,#72147E,#F21170);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 87%;
+    right: 5%;
 }
