@@ -10,3 +10,11 @@
 body,button,input {
     font-family: 'Comfortaa', cursive;
 }
+.title {
+    padding: 1rem;
+    background:linear-gradient(to bottom right,#72147E,#F21170);
+    text-align: center;
+    margin: 2vh auto;
+    width: 30%;
+    border-radius: 28% 72% 61% 39% / 49% 52% 48% 51% ;
+}
