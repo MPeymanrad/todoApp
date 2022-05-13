@@ -113,3 +113,29 @@ input,textarea {
     align-items: center;
     justify-content: space-between;
 }
+.todo_actions > *{
+    padding: .2rem;
+    transition: .5s;
+    border-radius: 50%;
+}
+#do_todo {
+    color: #018383;
+}
+#do_todo:hover {
+    color: #fff;
+    background-color: rgba(1, 131, 131,.5);
+}
+#edit_todo {
+    color: #4D77FF;
+}
+#edit_todo:hover {
+    color: #fff;
+    background-color: rgba(77, 119, 255,.5);
+}
+#delete_todo {
+    color: #F90716;
+}
+#delete_todo:hover {
+    color: #fff;
+    background-color: rgba(249, 7, 22,.5);
+}
