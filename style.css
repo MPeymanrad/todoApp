@@ -49,6 +49,7 @@ body,button,input,textarea {
     transition: .3s;
 }
 .close_btn {
+    cursor: pointer;
     color: #f00;
     position: absolute;
     top: 1%;
@@ -117,6 +118,7 @@ input,textarea {
     padding: .2rem;
     transition: .5s;
     border-radius: 50%;
+    cursor: pointer;
 }
 #do_todo {
     color: #018383;
@@ -138,4 +140,41 @@ input,textarea {
 #delete_todo:hover {
     color: #fff;
     background-color: rgba(249, 7, 22,.5);
+}
+@media only screen and (min-width:768px) {
+    .title {
+        font-size: 3.5rem;
+    }
+    .todo_title {
+        font-size: 3rem;
+    }
+    .todos_container{
+        width: 60%;
+    }
+    .todo_title{
+        font-size: 1.5rem;
+    }
+    .add_btn {
+        font-size: 3.5rem;
+        top: 85%;
+    }
+    .close_btn {
+        font-size: 3rem;
+    }
+    .add_form > * {
+        font-size: 1.2rem;
+    }
+    .todo_actions > *{
+        font-size: 2rem;
+    }
+}
+@media only screen and (min-width:1440px) {
+    .todos_container {
+        width: 40%;
+    }
+    .add_modal {
+        width: 80%;
+        left: 10%;
+        right: 10%;
+    }
 }
