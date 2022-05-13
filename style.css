@@ -35,3 +35,13 @@ body,button,input {
     top: 87%;
     right: 5%;
 }
+.add_modal {
+    width: 95%;
+    padding: .5rem;
+    position: absolute;
+    left: 2.5%;
+    right: 2.5%;
+    top: 30%;
+    border-radius: 15px;
+    box-shadow: 0 0 25px #d3d3d3;
+}
