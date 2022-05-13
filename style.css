@@ -46,6 +46,7 @@ body,button,input,textarea {
     top: -100%;
     border-radius: 15px;
     box-shadow: 0 0 25px #d3d3d3;
+    transition: .3s;
 }
 .close_btn {
     color: #f00;
