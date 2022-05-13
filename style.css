@@ -43,7 +43,7 @@ body,button,input,textarea {
     z-index: 999;
     left: 2.5%;
     right: 2.5%;
-    top: 20%;
+    top: -100%;
     border-radius: 15px;
     box-shadow: 0 0 25px #d3d3d3;
 }
@@ -83,6 +83,7 @@ input,textarea {
     box-shadow: 0 0 20px #72147E ;
 }
 .overlay {
+    display: none;
     width: 100%;
     height: 100%;
     position: absolute;
