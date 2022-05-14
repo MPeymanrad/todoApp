@@ -23,7 +23,11 @@ function hideModal() {
 function loadTodos() {
   for (let i = 0; i < localStorage.length; i++) {
     let todo = JSON.parse(localStorage.getItem(String(i + 1)));
-    createTodoElem(todo.title, i + 1);
+    let createdTodo = createTodoElem(todo.title, i + 1);
+    if (todo.isDone) {
+      createdTodo.style.textDecorationLine =
+    "line-through";
+    }
   }
 }
 
@@ -60,6 +64,9 @@ function completeTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
   e.target.parentElement.parentElement.style.textDecorationLine =
     "line-through";
+    let todoToEdit =JSON.parse(localStorage.getItem(todoId)) 
+  todoToEdit.isDone = true
+  localStorage.setItem(todoId,JSON.stringify(todoToEdit))
 }
 
 function deleteTodo(e) {
