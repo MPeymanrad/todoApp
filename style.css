@@ -106,6 +106,7 @@ input,textarea {
     overflow: auto;
 }
 .todo {
+    cursor: pointer;
     margin: 10px auto;
     background-color: #FA9905;
     padding: 1rem;
