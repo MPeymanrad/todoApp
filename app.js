@@ -19,7 +19,7 @@ function hideModal() {
 }
 function loadTodos() {
   for (let i = 0; i < localStorage.length; i++) {
-    let todo = localStorage.getItem(String(i + 1))
+    let todo =JSON.parse(localStorage.getItem(String(i + 1))) 
     createTodoElem(todo.title,i + 1)
   }
 }
