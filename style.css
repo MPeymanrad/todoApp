@@ -73,6 +73,9 @@ input,textarea {
     border-radius: 15px;
     outline: none;
 }
+textarea {
+    resize: none;
+}
 .add_todo_btn {
     border: none;
     padding: .5rem 1rem;

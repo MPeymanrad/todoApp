@@ -9,6 +9,9 @@ const todoDescriptionInput = $.getElementById("todo_description_input");
 const modalCloseBtn = $.querySelector(".close_btn");
 const todoSubmitBtn = $.querySelector(".add_todo_btn");
 
+let isEditing = false;
+let todoEditId;
+let todoToEdit;
 function showModal() {
   addModal.style.top = "20%";
   addModalOverlay.style.display = "block";
@@ -19,41 +22,50 @@ function hideModal() {
 }
 function loadTodos() {
   for (let i = 0; i < localStorage.length; i++) {
-    let todo =JSON.parse(localStorage.getItem(String(i + 1))) 
-    createTodoElem(todo.title,i + 1)
+    let todo = JSON.parse(localStorage.getItem(String(i + 1)));
+    createTodoElem(todo.title, i + 1);
   }
 }
 
-function editTodo(e) {
+function goToTodoEditMode(e) {
   //get data from local storage...
-  let todoId = e.target.parentElement.parentElement.getAttribute('data-id')
-  let todoToEdit =JSON.parse(localStorage.getItem(todoId)) 
-  let todoName = todoToEdit.title
-  let todoDes = todoToEdit.des
-  todoTitleInput.value = todoName
-  todoDescriptionInput.value = todoDes
+  todoEditId = e.target.parentElement.parentElement.getAttribute("data-id");
+  todoToEdit = JSON.parse(localStorage.getItem(todoEditId))
+  let todoName = todoToEdit.title;
+  let todoDes = todoToEdit.des;
+  todoTitleInput.value = todoName;
+  todoDescriptionInput.value = todoDes;
+  isEditing = true;
   showModal();
 }
-function createTodoElem(title,id) {
+function editTodo() {
+  todoToEdit.title = todoTitleInput.value;
+  todoToEdit.des = todoDescriptionInput.value;
+  localStorage.setItem(todoEditId,JSON.stringify(todoToEdit))
+  let editingTodoTitle = $.querySelector(`.todo[data-id="${todoEditId}"] h3`);
+  editingTodoTitle.innerHTML = todoTitleInput.value;
+  hideModal();
+  isEditing = false
+}
+function createTodoElem(title, id) {
   const todo = $.createElement("div");
   todo.classList.add("todo");
-  todo.setAttribute('data-id',id)
+  todo.setAttribute("data-id", id);
   const todoInners = `<h3 class="todo_title">${title}</h3><div class="todo_actions"><span class="do_todo material-symbols-outlined" title="Complete Todo">done</span><span class="edit_todo material-symbols-outlined" title="Edit Todo">edit</span><span class=" delete_todo material-symbols-outlined" title="Delete Todo">delete</span></div>`;
   todo.innerHTML = todoInners;
   todosContainer.append(todo);
   return todo;
 }
 function completeTodo(e) {
-  let todoId = e.target.parentElement.parentElement.getAttribute('data-id')
+  let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
   e.target.parentElement.parentElement.style.textDecorationLine =
     "line-through";
-
 }
 
 function deleteTodo(e) {
-  let todoId = e.target.parentElement.parentElement.getAttribute('data-id')
+  let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
   e.target.parentElement.parentElement.remove();
-  localStorage.removeItem(todoId)
+  localStorage.removeItem(todoId);
 }
 function setEventsForTodoActions() {
   const doTodoElems = $.querySelectorAll(".do_todo");
@@ -63,7 +75,7 @@ function setEventsForTodoActions() {
     item.addEventListener("click", completeTodo);
   });
   editTodoElems.forEach(function (item) {
-    item.addEventListener("click", editTodo);
+    item.addEventListener("click", goToTodoEditMode);
   });
   delTodoElems.forEach(function (item) {
     item.addEventListener("click", deleteTodo);
@@ -71,20 +83,24 @@ function setEventsForTodoActions() {
 }
 function addTodo() {
   const newNoteObj = {
-    title:todoTitleInput.value,
-    des:todoDescriptionInput.value,
-    isDone:false,
-  }
-  createTodoElem(todoTitleInput.value,localStorage.length + 1);
-  localStorage.setItem(localStorage.length + 1,JSON.stringify(newNoteObj))
+    title: todoTitleInput.value,
+    des: todoDescriptionInput.value,
+    isDone: false,
+  };
+  createTodoElem(todoTitleInput.value, localStorage.length + 1);
+  localStorage.setItem(localStorage.length + 1, JSON.stringify(newNoteObj));
   setEventsForTodoActions();
   hideModal();
 }
-window.addEventListener('load',loadTodos)
-window.addEventListener('load',setEventsForTodoActions)
+window.addEventListener("load", loadTodos);
+window.addEventListener("load", setEventsForTodoActions);
 addBtn.addEventListener("click", showModal);
 todoSubmitBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  addTodo();
+  if (isEditing) {
+    editTodo();
+  } else {
+    addTodo();
+  }
 });
 modalCloseBtn.addEventListener("click", hideModal);
