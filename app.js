@@ -12,6 +12,7 @@ const todoSubmitBtn = $.querySelector(".add_todo_btn");
 let isEditing = false;
 let todoEditId;
 let todoToEdit;
+let isDone;
 function showModal() {
   addModal.style.top = "20%";
   addModalOverlay.style.display = "block";
@@ -22,11 +23,14 @@ function hideModal() {
 }
 function loadTodos() {
   for (let i = 0; i < localStorage.length; i++) {
-    let todo = JSON.parse(localStorage.getItem(String(i + 1)));
-    let createdTodo = createTodoElem(todo.title, i + 1);
-    if (todo.isDone) {
-      createdTodo.style.textDecorationLine =
-    "line-through";
+    if (localStorage.getItem(i + 1)) {
+      let todo = JSON.parse(localStorage.getItem(String(i + 1)));
+      let createdTodo = createTodoElem(todo.title, i + 1);
+      if (todo.isDone) {
+        createdTodo.firstChild.style.textDecorationLine = "line-through";
+        createdTodo.firstChild.nextSibling.firstChild.innerHTML = "close";
+        isDone = true;
+      }
     }
   }
 }
@@ -34,7 +38,7 @@ function loadTodos() {
 function goToTodoEditMode(e) {
   //get data from local storage...
   todoEditId = e.target.parentElement.parentElement.getAttribute("data-id");
-  todoToEdit = JSON.parse(localStorage.getItem(todoEditId))
+  todoToEdit = JSON.parse(localStorage.getItem(todoEditId));
   let todoName = todoToEdit.title;
   let todoDes = todoToEdit.des;
   todoTitleInput.value = todoName;
@@ -45,11 +49,11 @@ function goToTodoEditMode(e) {
 function editTodo() {
   todoToEdit.title = todoTitleInput.value;
   todoToEdit.des = todoDescriptionInput.value;
-  localStorage.setItem(todoEditId,JSON.stringify(todoToEdit))
+  localStorage.setItem(todoEditId, JSON.stringify(todoToEdit));
   let editingTodoTitle = $.querySelector(`.todo[data-id="${todoEditId}"] h3`);
   editingTodoTitle.innerHTML = todoTitleInput.value;
   hideModal();
-  isEditing = false
+  isEditing = false;
 }
 function createTodoElem(title, id) {
   const todo = $.createElement("div");
@@ -64,11 +68,21 @@ function completeTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
   e.target.parentElement.parentElement.style.textDecorationLine =
     "line-through";
-    let todoToEdit =JSON.parse(localStorage.getItem(todoId)) 
-  todoToEdit.isDone = true
-  localStorage.setItem(todoId,JSON.stringify(todoToEdit))
+  let todoToEdit = JSON.parse(localStorage.getItem(todoId));
+  todoToEdit.isDone = true;
+  localStorage.setItem(todoId, JSON.stringify(todoToEdit));
+  e.target.innerHTML = "close";
+  isDone = true;
 }
-
+function uncompleteTodo(e) {
+  let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
+  e.target.parentElement.parentElement.firstChild.style.textDecorationLine = "";
+  let todoToEdit = JSON.parse(localStorage.getItem(todoId));
+  todoToEdit.isDone = false;
+  localStorage.setItem(todoId, JSON.stringify(todoToEdit));
+  e.target.innerHTML = "done";
+  isDone = false;
+}
 function deleteTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
   e.target.parentElement.parentElement.remove();
@@ -79,7 +93,13 @@ function setEventsForTodoActions() {
   const editTodoElems = $.querySelectorAll(".edit_todo");
   const delTodoElems = $.querySelectorAll(".delete_todo");
   doTodoElems.forEach(function (item) {
-    item.addEventListener("click", completeTodo);
+    item.addEventListener("click", function (e) {
+      if (!isDone) {
+        completeTodo(e);
+      } else {
+        uncompleteTodo(e);
+      }
+    });
   });
   editTodoElems.forEach(function (item) {
     item.addEventListener("click", goToTodoEditMode);
