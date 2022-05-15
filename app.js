@@ -21,24 +21,34 @@ function hideModal() {
   addModal.style.top = "-100%";
   addModalOverlay.style.display = "none";
 }
+function setTodoIds() {
+  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  for (let i = 0; i < todoList.length; i++) {
+    todoList[i].id = i;
+    // createTodoElem(todoList[i].title, todoList[i].id);
+  }
+  localStorage.setItem("todoList", JSON.stringify(todoList));
+}
 function loadTodos() {
-  for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage.getItem(i + 1)) {
-      let todo = JSON.parse(localStorage.getItem(String(i + 1)));
-      let createdTodo = createTodoElem(todo.title, i + 1);
-      if (todo.isDone) {
-        createdTodo.firstChild.style.textDecorationLine = "line-through";
-        createdTodo.firstChild.nextSibling.firstChild.innerHTML = "close";
-        isDone = true;
-      }
+  if (!localStorage.getItem("todoList")) {
+    localStorage.setItem("todoList", JSON.stringify([]));
+  }
+  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  for (let i = 0; i < todoList.length; i++) {
+    todoList[i].id = i;
+    let currentTodoElem = createTodoElem(todoList[i].title, todoList[i].id);
+    if (todoList[i].isDone) {
+      currentTodoElem.style.textDecorationLine = "line-through";
+      currentTodoElem.firstChild.nextSibling.firstChild.innerHTML = "close";
     }
   }
+  localStorage.setItem("todoList", JSON.stringify(todoList));
 }
-
 function goToTodoEditMode(e) {
   //get data from local storage...
   todoEditId = e.target.parentElement.parentElement.getAttribute("data-id");
-  todoToEdit = JSON.parse(localStorage.getItem(todoEditId));
+  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  todoToEdit = todoList[todoEditId];
   let todoName = todoToEdit.title;
   let todoDes = todoToEdit.des;
   todoTitleInput.value = todoName;
@@ -47,9 +57,11 @@ function goToTodoEditMode(e) {
   showModal();
 }
 function editTodo() {
+  let todoList = JSON.parse(localStorage.getItem("todoList"));
   todoToEdit.title = todoTitleInput.value;
   todoToEdit.des = todoDescriptionInput.value;
-  localStorage.setItem(todoEditId, JSON.stringify(todoToEdit));
+  todoList[todoEditId] = todoToEdit;
+  localStorage.setItem("todoList", JSON.stringify(todoList));
   let editingTodoTitle = $.querySelector(`.todo[data-id="${todoEditId}"] h3`);
   editingTodoTitle.innerHTML = todoTitleInput.value;
   hideModal();
@@ -68,25 +80,33 @@ function completeTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
   e.target.parentElement.parentElement.style.textDecorationLine =
     "line-through";
-  let todoToEdit = JSON.parse(localStorage.getItem(todoId));
-  todoToEdit.isDone = true;
-  localStorage.setItem(todoId, JSON.stringify(todoToEdit));
+  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  todoList[todoId].isDone = true;
+  localStorage.setItem("todoList", JSON.stringify(todoList));
   e.target.innerHTML = "close";
   isDone = true;
 }
 function uncompleteTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
-  e.target.parentElement.parentElement.firstChild.style.textDecorationLine = "";
-  let todoToEdit = JSON.parse(localStorage.getItem(todoId));
-  todoToEdit.isDone = false;
-  localStorage.setItem(todoId, JSON.stringify(todoToEdit));
+  e.target.parentElement.parentElement.style.textDecorationLine = "";
+  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  todoList[todoId].isDone = false;
+  localStorage.setItem("todoList", JSON.stringify(todoList));
   e.target.innerHTML = "done";
   isDone = false;
 }
 function deleteTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
   e.target.parentElement.parentElement.remove();
-  localStorage.removeItem(todoId);
+  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  console.log(todoId);
+  todoList.splice(todoId, 1);
+  let todoElems = $.getElementsByClassName("todo");
+  for (let i = 0; i < todoList.length; i++) {
+    todoList[i].id = i;
+    todoElems[i].setAttribute("data-id", i);
+  }
+  localStorage.setItem("todoList", JSON.stringify(todoList));
 }
 function setEventsForTodoActions() {
   const doTodoElems = $.querySelectorAll(".do_todo");
@@ -109,13 +129,16 @@ function setEventsForTodoActions() {
   });
 }
 function addTodo() {
+  const todoList = JSON.parse(localStorage.getItem("todoList"));
   const newNoteObj = {
+    id: todoList.length,
     title: todoTitleInput.value,
     des: todoDescriptionInput.value,
     isDone: false,
   };
-  createTodoElem(todoTitleInput.value, localStorage.length + 1);
-  localStorage.setItem(localStorage.length + 1, JSON.stringify(newNoteObj));
+  createTodoElem(todoTitleInput.value, todoList.length);
+  todoList.push(newNoteObj);
+  localStorage.setItem("todoList", JSON.stringify(todoList));
   setEventsForTodoActions();
   hideModal();
 }
