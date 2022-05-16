@@ -1,9 +1,12 @@
 const $ = document;
 const addBtn = $.querySelector(".add_btn");
 const addModal = $.querySelector(".add_modal");
-const addModalOverlay = $.querySelector(".overlay");
+const modalOverlay = $.querySelector(".overlay");
 const todosContainer = $.querySelector(".todos_container");
-//modal elements
+const aboutBtn = $.querySelector('.about_modal_btn')
+const aboutModal = $.querySelector('.about_modal')
+const aboutModalCloseBtn = $.querySelector('.about_close_btn')
+//add modal elements
 const todoTitleInput = $.getElementById("todo_title_input");
 const todoDescriptionInput = $.getElementById("todo_description_input");
 const modalCloseBtn = $.querySelector(".close_btn");
@@ -13,25 +16,27 @@ let isEditing = false;
 let todoEditId;
 let todoToEdit;
 let isDone;
-function showModal() {
+function showAddModal() {
   addModal.style.top = "20%";
-  addModalOverlay.style.display = "block";
+  modalOverlay.style.display = "block";
 }
-function hideModal() {
+function hideAddModal() {
   addModal.style.top = "-100%";
-  addModalOverlay.style.display = "none";
+  modalOverlay.style.display = "none";
+}
+function showAboutModal() {
+  aboutModal.style.top = "20%";
+  modalOverlay.style.display = "block";
+}
+
+
+function hideAboutModal() {
+  aboutModal.style.top = "-100%";
+  modalOverlay.style.display = "none";
 }
 function clearInputs() {
   todoTitleInput.value = ''
   todoDescriptionInput.value = ''
-}
-function setTodoIds() {
-  let todoList = JSON.parse(localStorage.getItem("todoList"));
-  for (let i = 0; i < todoList.length; i++) {
-    todoList[i].id = i;
-    // createTodoElem(todoList[i].title, todoList[i].id);
-  }
-  localStorage.setItem("todoList", JSON.stringify(todoList));
 }
 function loadTodos() {
   if (!localStorage.getItem("todoList")) {
@@ -58,7 +63,7 @@ function goToTodoEditMode(e) {
   todoTitleInput.value = todoName;
   todoDescriptionInput.value = todoDes;
   isEditing = true;
-  showModal();
+  showAddModal();
 }
 function editTodo() {
   let todoList = JSON.parse(localStorage.getItem("todoList"));
@@ -68,7 +73,7 @@ function editTodo() {
   localStorage.setItem("todoList", JSON.stringify(todoList));
   let editingTodoTitle = $.querySelector(`.todo[data-id="${todoEditId}"] h3`);
   editingTodoTitle.innerHTML = todoTitleInput.value;
-  hideModal();
+  hideAddModal();
   isEditing = false;
 }
 function createTodoElem(title, id) {
@@ -155,12 +160,12 @@ function addTodo() {
   todoList.push(newNoteObj);
   localStorage.setItem("todoList", JSON.stringify(todoList));
   setEventsForTodoActions();
-  hideModal();
+  hideAddModal();
   clearInputs()
 }
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setEventsForTodoActions);
-addBtn.addEventListener("click", showModal);
+addBtn.addEventListener("click", showAddModal);
 todoSubmitBtn.addEventListener("click", function (e) {
   e.preventDefault();
   addTodoHandler()
@@ -176,10 +181,12 @@ todoDescriptionInput.addEventListener('keydown',function(e) {
     addTodoHandler()
   }
 })
-modalCloseBtn.addEventListener("click", hideModal);
-addModalOverlay.addEventListener('click',hideModal)
+modalCloseBtn.addEventListener("click", hideAddModal);
+modalOverlay.addEventListener('click',hideAddModal)
 $.body.addEventListener('keydown',function(e) {
   if (e.key === 'Escape') {
-    hideModal()
+    hideAddModal()
   }
 })
+aboutBtn.addEventListener('click',showAboutModal)
+aboutModalCloseBtn.addEventListener('click',hideAboutModal)

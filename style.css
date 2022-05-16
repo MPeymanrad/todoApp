@@ -43,7 +43,7 @@ body,button,input,textarea {
     z-index: 999;
     left: 2.5%;
     right: 2.5%;
-    top: 30%;
+    top: -100%;
     border-radius: 15px;
     box-shadow: 0 0 25px #d3d3d3;
     transition: .3s;
