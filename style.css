@@ -145,6 +145,17 @@ textarea {
     color: #fff;
     background-color: rgba(249, 7, 22,.5);
 }
+.about_modal_btn {
+    position: absolute;
+    top: 88%;
+    left: 3%;
+    font-size: 2rem;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #4D77FF;
+}
 @media only screen and (min-width:768px) {
     .title {
         font-size: 3.5rem;
@@ -170,6 +181,10 @@ textarea {
     }
     .todo_actions > *{
         font-size: 2rem;
+    }
+    .about_modal_btn{
+        font-size: 3.5rem;
+        top: 85%;
     }
 }
 @media only screen and (min-width:1440px) {
