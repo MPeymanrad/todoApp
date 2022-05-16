@@ -1,221 +1,234 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body,button,input,textarea {
-    font-family: 'Comfortaa', cursive;
+body,
+button,
+input,
+textarea {
+  font-family: "Comfortaa", cursive;
 }
 .title {
-    padding: 1rem;
-    background:linear-gradient(to bottom right,#72147E,#F21170);
-    text-align: center;
+  padding: 1rem;
+  background: linear-gradient(to bottom right, #72147e, #f21170);
+  text-align: center;
 }
 .todos_title {
-    margin-top: 5vh;
-    text-align: center;
-    font-weight: 900;
-    font-size: 2rem;
+  margin-top: 5vh;
+  text-align: center;
+  font-weight: 900;
+  font-size: 2rem;
 }
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 700,
-  'GRAD' 200,
-  'opsz' 48
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 200, "opsz" 48;
 }
 .add_btn {
-    padding: 1rem;
-    background:linear-gradient(to right,#72147E,#F21170);
-    border-radius: 50%;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    position: absolute;
-    top: 88%;
-    right: 3%;
+  padding: 1rem;
+  background: linear-gradient(to right, #72147e, #f21170);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 88%;
+  right: 3%;
 }
-.about_modal,.add_modal {
-    background-color: #fff;
-    width: 95%;
-    padding: .5rem;
-    position: absolute;
-    z-index: 999;
-    left: 2.5%;
-    right: 2.5%;
-    top: -100%;
-    border-radius: 15px;
-    box-shadow: 0 0 25px #d3d3d3;
-    transition: .3s;
+.about_modal,
+.add_modal {
+  background-color: #fff;
+  width: 95%;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 999;
+  left: 2.5%;
+  right: 2.5%;
+  top: -100%;
+  border-radius: 15px;
+  box-shadow: 0 0 25px #d3d3d3;
+  transition: 0.3s;
 }
 .about_modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .about_modal > * {
-    margin: 8px 0;
+  margin: 8px 0;
 }
 .about_link {
-    text-decoration: none;
-    color: #0AA1DD;
+  text-decoration: none;
+  color: #0aa1dd;
 }
 .about_sperator {
-    width: 100%;
-    border:1px dashed #F21170;
+  width: 100%;
+  border: 1px dashed #f21170;
 }
 .about_description {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 .about_footer_para {
-    font-weight: 700;
+  font-weight: 700;
 }
-.about_close_btn,.close_btn {
-    cursor: pointer;
-    color: #f00;
-    position: absolute;
-    top: 1%;
-    right: 3%;
-    font-size: 2rem;
-    font-weight: 700;
+.about_close_btn,
+.close_btn {
+  cursor: pointer;
+  color: #f00;
+  position: absolute;
+  top: 1%;
+  right: 3%;
+  font-size: 2rem;
+  font-weight: 700;
 }
 .add_form {
-    padding-top:1.5rem;
-    display: flex;
-    flex-direction: column;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
-.add_form > *{
-    margin: .5rem 0;
-    font-size: 1.1rem;
-    font-weight: 700;
+.add_form > * {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
-input,textarea {
-    padding: 9px 12px;
-    border: 1px solid #d3d3d3;
-    border-radius: 15px;
-    outline: none;
+input,
+textarea {
+  padding: 9px 12px;
+  border: 1px solid #d3d3d3;
+  border-radius: 15px;
+  outline: none;
 }
 textarea {
-    resize: none;
+  resize: none;
 }
 .add_todo_btn {
-    border: none;
-    padding: .5rem 1rem;
-    border-radius: 40px;
-    background: linear-gradient(to right,#72147E,#F21170);
-    color: white;
-    transition: .5s;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+  background: linear-gradient(to right, #72147e, #f21170);
+  color: white;
+  transition: 0.5s;
 }
 .add_todo_btn:hover {
-    box-shadow: 0 0 20px #72147E ;
+  box-shadow: 0 0 20px #72147e;
 }
 .overlay {
-    display: none;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 998;
-    left: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 998;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .todos_container {
-    border: 1px solid #d3d3d3;
-    border-radius: 15px;
-    padding: 0 .5rem;
-    height: 60vh;
-    width: 95%;
-    margin: 1.5rem auto;
-    overflow: auto;
+  border: 1px solid #d3d3d3;
+  border-radius: 15px;
+  padding: 0 0.5rem;
+  height: 60vh;
+  width: 95%;
+  margin: 1.5rem auto;
+  overflow: auto;
 }
 .todo {
-    cursor: pointer;
-    margin: 10px auto;
-    background-color: #FA9905;
-    padding: 1rem;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  cursor: pointer;
+  margin: 10px auto;
+  background-color: #fa9905;
+  padding: 1rem;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.todo_actions > *{
-    padding: .2rem;
-    transition: .5s;
-    border-radius: 50%;
-    cursor: pointer;
+.todo_actions > * {
+  padding: 0.2rem;
+  transition: 0.5s;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .do_todo {
-    color: #018383;
+  color: #018383;
 }
 .do_todo:hover {
-    color: #fff;
-    background-color: rgba(1, 131, 131,.5);
+  color: #fff;
+  background-color: rgba(1, 131, 131, 0.5);
 }
 .edit_todo {
-    color: #4D77FF;
+  color: #4d77ff;
 }
 .edit_todo:hover {
-    color: #fff;
-    background-color: rgba(77, 119, 255,.5);
+  color: #fff;
+  background-color: rgba(77, 119, 255, 0.5);
 }
 .delete_todo {
-    color: #F90716;
+  color: #f90716;
 }
 .delete_todo:hover {
-    color: #fff;
-    background-color: rgba(249, 7, 22,.5);
+  color: #fff;
+  background-color: rgba(249, 7, 22, 0.5);
 }
 .about_modal_btn {
-    position: absolute;
-    top: 88%;
-    left: 3%;
+  position: absolute;
+  top: 88%;
+  left: 3%;
+  font-size: 2rem;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #4d77ff;
+}
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 3.5rem;
+  }
+  .todo_title {
+    font-size: 3rem;
+  }
+  .todos_container {
+    width: 60%;
+  }
+  .todo_title {
+    font-size: 1.5rem;
+  }
+  .about_modal_btn,
+  .add_btn {
+    font-size: 3.5rem;
+    top: 85%;
+  }
+  .about_close_btn,
+  .close_btn {
+    font-size: 3rem;
+  }
+  .add_form > *{
+    font-size: 1.2rem;
+  }
+  .todo_actions > * {
     font-size: 2rem;
-    color: #fff;
-    padding: 1rem;
-    border-radius: 50%;
-    cursor: pointer;
-    background-color: #4D77FF;
+  }
+  .about_title{
+      font-size: 2.5rem;
+  }
+  .about_version {
+      font-size: 1.5rem;
+  }
+  .about_description {
+      font-size: 1.5rem;
+  }
+  .about_footer_para {
+      font-size: 1.2rem;
+  }
 }
-@media only screen and (min-width:768px) {
-    .title {
-        font-size: 3.5rem;
-    }
-    .todo_title {
-        font-size: 3rem;
-    }
-    .todos_container{
-        width: 60%;
-    }
-    .todo_title{
-        font-size: 1.5rem;
-    }
-    .add_btn {
-        font-size: 3.5rem;
-        top: 85%;
-    }
-    .close_btn {
-        font-size: 3rem;
-    }
-    .add_form > * {
-        font-size: 1.2rem;
-    }
-    .todo_actions > *{
-        font-size: 2rem;
-    }
-    .about_modal_btn{
-        font-size: 3.5rem;
-        top: 85%;
-    }
-}
-@media only screen and (min-width:1440px) {
-    .todos_container {
-        width: 40%;
-    }
-    .add_modal {
-        width: 80%;
-        left: 10%;
-        right: 10%;
-    }
+@media only screen and (min-width: 1440px) {
+  .todos_container {
+    width: 40%;
+  }
+  .add_modal,
+  .about_modal {
+    width: 80%;
+    left: 10%;
+    right: 10%;
+  }
 }
