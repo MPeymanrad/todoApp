@@ -21,6 +21,10 @@ function hideModal() {
   addModal.style.top = "-100%";
   addModalOverlay.style.display = "none";
 }
+function clearInputs() {
+  todoTitleInput.value = ''
+  todoDescriptionInput.value = ''
+}
 function setTodoIds() {
   let todoList = JSON.parse(localStorage.getItem("todoList"));
   for (let i = 0; i < todoList.length; i++) {
@@ -152,6 +156,7 @@ function addTodo() {
   localStorage.setItem("todoList", JSON.stringify(todoList));
   setEventsForTodoActions();
   hideModal();
+  clearInputs()
 }
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setEventsForTodoActions);
