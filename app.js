@@ -99,7 +99,6 @@ function deleteTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
   e.target.parentElement.parentElement.remove();
   let todoList = JSON.parse(localStorage.getItem("todoList"));
-  console.log(todoId);
   todoList.splice(todoId, 1);
   let todoElems = $.getElementsByClassName("todo");
   for (let i = 0; i < todoList.length; i++) {
@@ -154,3 +153,9 @@ todoSubmitBtn.addEventListener("click", function (e) {
   }
 });
 modalCloseBtn.addEventListener("click", hideModal);
+addModalOverlay.addEventListener('click',hideModal)
+$.body.addEventListener('keydown',function(e) {
+  if (e.key === 'Escape') {
+    hideModal()
+  }
+})
