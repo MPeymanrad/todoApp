@@ -35,7 +35,7 @@ body,button,input,textarea {
     top: 88%;
     right: 3%;
 }
-.add_modal {
+.about_modal,.add_modal {
     background-color: #fff;
     width: 95%;
     padding: .5rem;
@@ -43,12 +43,34 @@ body,button,input,textarea {
     z-index: 999;
     left: 2.5%;
     right: 2.5%;
-    top: -100%;
+    top: 30%;
     border-radius: 15px;
     box-shadow: 0 0 25px #d3d3d3;
     transition: .3s;
 }
-.close_btn {
+.about_modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.about_modal > * {
+    margin: 8px 0;
+}
+.about_link {
+    text-decoration: none;
+    color: #0AA1DD;
+}
+.about_sperator {
+    width: 100%;
+    border:1px dashed #F21170;
+}
+.about_description {
+    font-size: 1.2rem;
+}
+.about_footer_para {
+    font-weight: 700;
+}
+.about_close_btn,.close_btn {
     cursor: pointer;
     color: #f00;
     position: absolute;
