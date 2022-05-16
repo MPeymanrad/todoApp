@@ -127,6 +127,13 @@ function setEventsForTodoActions() {
     item.addEventListener("click", deleteTodo);
   });
 }
+function addTodoHandler () {
+  if (isEditing) {
+    editTodo();
+  } else {
+    addTodo();
+  }
+}
 function addTodo() {
   const todoList = JSON.parse(localStorage.getItem("todoList"));
   const newNoteObj = {
@@ -146,12 +153,19 @@ window.addEventListener("load", setEventsForTodoActions);
 addBtn.addEventListener("click", showModal);
 todoSubmitBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  if (isEditing) {
-    editTodo();
-  } else {
-    addTodo();
-  }
+  addTodoHandler()
 });
+todoTitleInput.addEventListener('keydown',function(e) {
+  e.preventDefault()
+  if (e.key === 'Enter') {
+    addTodoHandler()
+  }
+})
+todoDescriptionInput.addEventListener('keydown',function(e) {
+  if (e.ctrlKey && e.key === 'Enter') {
+    addTodoHandler()
+  }
+})
 modalCloseBtn.addEventListener("click", hideModal);
 addModalOverlay.addEventListener('click',hideModal)
 $.body.addEventListener('keydown',function(e) {
