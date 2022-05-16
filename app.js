@@ -128,11 +128,16 @@ function setEventsForTodoActions() {
   });
 }
 function addTodoHandler () {
-  if (isEditing) {
-    editTodo();
+  if (todoTitleInput.value) {
+    if (isEditing) {
+      editTodo();
+    } else {
+      addTodo();
+    }    
   } else {
-    addTodo();
+    alert('Please Enter A Title For Your Todo.')
   }
+
 }
 function addTodo() {
   const todoList = JSON.parse(localStorage.getItem("todoList"));
@@ -156,8 +161,8 @@ todoSubmitBtn.addEventListener("click", function (e) {
   addTodoHandler()
 });
 todoTitleInput.addEventListener('keydown',function(e) {
-  e.preventDefault()
   if (e.key === 'Enter') {
+    e.preventDefault()
     addTodoHandler()
   }
 })
