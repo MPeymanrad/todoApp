@@ -47,7 +47,7 @@ function loadTodos() {
     todoList[i].id = i;
     let currentTodoElem = createTodoElem(todoList[i].title, todoList[i].id);
     if (todoList[i].isDone) {
-      currentTodoElem.style.textDecorationLine = "line-through";
+      currentTodoElem.classList.add('complete')
       currentTodoElem.firstChild.nextSibling.firstChild.innerHTML = "close";
     }
   }
@@ -87,8 +87,7 @@ function createTodoElem(title, id) {
 }
 function completeTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
-  e.target.parentElement.parentElement.style.textDecorationLine =
-    "line-through";
+  e.target.parentElement.parentElement.classList.add('complete')
   let todoList = JSON.parse(localStorage.getItem("todoList"));
   todoList[todoId].isDone = true;
   localStorage.setItem("todoList", JSON.stringify(todoList));
@@ -97,7 +96,7 @@ function completeTodo(e) {
 }
 function uncompleteTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
-  e.target.parentElement.parentElement.style.textDecorationLine = "";
+  e.target.parentElement.parentElement.classList.remove('complete');
   let todoList = JSON.parse(localStorage.getItem("todoList"));
   todoList[todoId].isDone = false;
   localStorage.setItem("todoList", JSON.stringify(todoList));

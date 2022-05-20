@@ -180,6 +180,10 @@ textarea {
   cursor: pointer;
   background-color: #4d77ff;
 }
+.complete {
+  color: #d3d3d3;
+  text-decoration-line: line-through;
+}
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 3.5rem;
