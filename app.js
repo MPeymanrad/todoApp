@@ -18,6 +18,7 @@ let todoEditId;
 let todoToEdit;
 let isDone;
 function showAddModal() {
+  todoTitleInput.focus()
   addModal.style.top = "20%";
   modalOverlay.style.display = "block";
 }
