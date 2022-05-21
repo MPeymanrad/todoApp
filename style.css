@@ -186,15 +186,15 @@ textarea {
 }
 .go_to_top {
   position: absolute;
-  top: 88%;
-  left: 45%;
+  top: 86%;
+  right: 40%;
   z-index: 997;
   padding: 1rem;
   border-radius: 50px;
   border: none;
   background-color: #fa9905;
   color: #fff;
-  font-size: 2rem;
+  font-size: 3.5rem;
   cursor: pointer;
 }
 @media only screen and (min-width: 768px) {
@@ -211,9 +211,13 @@ textarea {
     font-size: 1.5rem;
   }
   .about_modal_btn,
-  .add_btn,.go_to_top {
+  .add_btn{
     font-size: 3.5rem;
     top: 85%;
+  }
+  .go_to_top {
+    top: 45%;
+    right: 3%;
   }
   .about_close_btn,
   .close_btn {
