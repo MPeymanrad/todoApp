@@ -6,6 +6,7 @@ const todosContainer = $.querySelector(".todos_container");
 const aboutBtn = $.querySelector('.about_modal_btn')
 const aboutModal = $.querySelector('.about_modal')
 const aboutModalCloseBtn = $.querySelector('.about_close_btn')
+const goToTopBtn = $.querySelector('.go_to_top')
 //add modal elements
 const todoTitleInput = $.getElementById("todo_title_input");
 const todoDescriptionInput = $.getElementById("todo_description_input");
@@ -162,6 +163,12 @@ function addTodo() {
   hideAddModal();
   clearInputs()
 }
+function scrollToTop() {
+  todosContainer.scrollTo({
+    top:0,
+    behavior:'smooth',
+  })
+}
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setEventsForTodoActions);
 addBtn.addEventListener("click", showAddModal);
@@ -189,3 +196,4 @@ $.body.addEventListener('keydown',function(e) {
 })
 aboutBtn.addEventListener('click',showAboutModal)
 aboutModalCloseBtn.addEventListener('click',hideAboutModal)
+goToTopBtn.addEventListener('click',scrollToTop)

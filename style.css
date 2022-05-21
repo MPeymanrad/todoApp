@@ -184,6 +184,19 @@ textarea {
   color: #d3d3d3;
   text-decoration-line: line-through;
 }
+.go_to_top {
+  position: absolute;
+  top: 88%;
+  left: 45%;
+  z-index: 997;
+  padding: 1rem;
+  border-radius: 50px;
+  border: none;
+  background-color: #fa9905;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 3.5rem;
@@ -198,7 +211,7 @@ textarea {
     font-size: 1.5rem;
   }
   .about_modal_btn,
-  .add_btn {
+  .add_btn,.go_to_top {
     font-size: 3.5rem;
     top: 85%;
   }
