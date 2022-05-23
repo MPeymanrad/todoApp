@@ -193,7 +193,7 @@ function changeTheme() {
       "linear-gradient(to bottom right, #DA0037,#EDEDED )"
     );
     root.style.setProperty("--secondary-color", "#525252");
-    root.style.setProperty("--todo-color", "#EC625F");
+    root.style.setProperty("--todo-color", "#C4B6B6");
     root.style.setProperty("--primary-text-color", "#fff");
     root.style.setProperty("--secondary-text-color", "#000");
   }
@@ -208,7 +208,7 @@ function setTheme() {
       "linear-gradient(to bottom right, #DA0037,#EDEDED )"
     );
     root.style.setProperty("--secondary-color", "#525252");
-    root.style.setProperty("--todo-color", "#EC625F");
+    root.style.setProperty("--todo-color", "#C4B6B6");
     root.style.setProperty("--primary-text-color", "#fff");
     root.style.setProperty("--secondary-text-color", "#000");
   } else {
