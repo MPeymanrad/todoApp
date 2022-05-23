@@ -245,10 +245,14 @@ todoDescriptionInput.addEventListener("keydown", function (e) {
   }
 });
 modalCloseBtn.addEventListener("click", hideAddModal);
-modalOverlay.addEventListener("click", hideAddModal);
+modalOverlay.addEventListener("click", function () {
+  hideAddModal();
+  hideAboutModal();
+});
 $.body.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     hideAddModal();
+    hideAboutModal();
   }
 });
 aboutBtn.addEventListener("click", showAboutModal);
