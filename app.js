@@ -1,4 +1,5 @@
 const $ = document;
+const root = $.documentElement;
 const addBtn = $.querySelector(".add_btn");
 const addModal = $.querySelector(".add_modal");
 const modalOverlay = $.querySelector(".overlay");
