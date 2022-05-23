@@ -1,5 +1,6 @@
 const $ = document;
 const root = $.documentElement;
+const toggleThemeBtn = $.querySelector('.toggle_theme')
 const addBtn = $.querySelector(".add_btn");
 const addModal = $.querySelector(".add_modal");
 const modalOverlay = $.querySelector(".overlay");
@@ -14,6 +15,7 @@ const todoDescriptionInput = $.getElementById("todo_description_input");
 const modalCloseBtn = $.querySelector(".close_btn");
 const todoSubmitBtn = $.querySelector(".add_todo_btn");
 
+let isDark = false;
 let isEditing = false;
 let todoEditId;
 let todoToEdit;
@@ -171,6 +173,27 @@ function scrollToTop() {
     behavior:'smooth',
   })
 }
+function changeTheme() {
+ if (isDark) {
+   isDark = false;
+   localStorage.setItem('theme','light')
+   toggleThemeBtn.firstElementChild.src = 'res/icons/moon.svg'
+   root.style.setProperty('--primary-color','linear-gradient(to bottom right, #72147e, #f21170)')
+   root.style.setProperty('--secondary-color','#fff')
+   root.style.setProperty('--todo-color','#fa9905')
+   root.style.setProperty('--primary-text-color','#000')
+   root.style.setProperty('--secondary-text-color','#fff')
+  } else {
+    isDark = true;
+    localStorage.setItem('theme','dark')
+    toggleThemeBtn.firstElementChild.src = 'res/icons/sun.svg'
+    root.style.setProperty('--primary-color','linear-gradient(to bottom right, #DA0037,#EDEDED )')
+    root.style.setProperty('--secondary-color','#525252')
+    root.style.setProperty('--todo-color','#EC625F')
+    root.style.setProperty('--primary-text-color','#fff')
+    root.style.setProperty('--secondary-text-color','#000')
+ }
+}
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setEventsForTodoActions);
 addBtn.addEventListener("click", showAddModal);
@@ -199,3 +222,4 @@ $.body.addEventListener('keydown',function(e) {
 aboutBtn.addEventListener('click',showAboutModal)
 aboutModalCloseBtn.addEventListener('click',hideAboutModal)
 goToTopBtn.addEventListener('click',scrollToTop)
+toggleThemeBtn.addEventListener('click',changeTheme)
