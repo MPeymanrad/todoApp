@@ -1,14 +1,14 @@
 const $ = document;
 const root = $.documentElement;
-const toggleThemeBtn = $.querySelector('.toggle_theme')
+const toggleThemeBtn = $.querySelector(".toggle_theme");
 const addBtn = $.querySelector(".add_btn");
 const addModal = $.querySelector(".add_modal");
 const modalOverlay = $.querySelector(".overlay");
 const todosContainer = $.querySelector(".todos_container");
-const aboutBtn = $.querySelector('.about_modal_btn')
-const aboutModal = $.querySelector('.about_modal')
-const aboutModalCloseBtn = $.querySelector('.about_close_btn')
-const goToTopBtn = $.querySelector('.go_to_top')
+const aboutBtn = $.querySelector(".about_modal_btn");
+const aboutModal = $.querySelector(".about_modal");
+const aboutModalCloseBtn = $.querySelector(".about_close_btn");
+const goToTopBtn = $.querySelector(".go_to_top");
 //add modal elements
 const todoTitleInput = $.getElementById("todo_title_input");
 const todoDescriptionInput = $.getElementById("todo_description_input");
@@ -21,7 +21,7 @@ let todoEditId;
 let todoToEdit;
 let isDone;
 function showAddModal() {
-  todoTitleInput.focus()
+  todoTitleInput.focus();
   addModal.style.top = "20%";
   modalOverlay.style.display = "block";
 }
@@ -34,14 +34,13 @@ function showAboutModal() {
   modalOverlay.style.display = "block";
 }
 
-
 function hideAboutModal() {
   aboutModal.style.top = "-100%";
   modalOverlay.style.display = "none";
 }
 function clearInputs() {
-  todoTitleInput.value = ''
-  todoDescriptionInput.value = ''
+  todoTitleInput.value = "";
+  todoDescriptionInput.value = "";
 }
 function loadTodos() {
   if (!localStorage.getItem("todoList")) {
@@ -52,7 +51,7 @@ function loadTodos() {
     todoList[i].id = i;
     let currentTodoElem = createTodoElem(todoList[i].title, todoList[i].id);
     if (todoList[i].isDone) {
-      currentTodoElem.classList.add('complete')
+      currentTodoElem.classList.add("complete");
       currentTodoElem.firstChild.nextSibling.firstChild.innerHTML = "close";
     }
   }
@@ -92,7 +91,7 @@ function createTodoElem(title, id) {
 }
 function completeTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
-  e.target.parentElement.parentElement.classList.add('complete')
+  e.target.parentElement.parentElement.classList.add("complete");
   let todoList = JSON.parse(localStorage.getItem("todoList"));
   todoList[todoId].isDone = true;
   localStorage.setItem("todoList", JSON.stringify(todoList));
@@ -101,7 +100,7 @@ function completeTodo(e) {
 }
 function uncompleteTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
-  e.target.parentElement.parentElement.classList.remove('complete');
+  e.target.parentElement.parentElement.classList.remove("complete");
   let todoList = JSON.parse(localStorage.getItem("todoList"));
   todoList[todoId].isDone = false;
   localStorage.setItem("todoList", JSON.stringify(todoList));
@@ -140,17 +139,16 @@ function setEventsForTodoActions() {
     item.addEventListener("click", deleteTodo);
   });
 }
-function addTodoHandler () {
+function addTodoHandler() {
   if (todoTitleInput.value) {
     if (isEditing) {
       editTodo();
     } else {
       addTodo();
-    }    
+    }
   } else {
-    alert('Please Enter A Title For Your Todo.')
+    alert("Please Enter A Title For Your Todo.");
   }
-
 }
 function addTodo() {
   const todoList = JSON.parse(localStorage.getItem("todoList"));
@@ -165,61 +163,95 @@ function addTodo() {
   localStorage.setItem("todoList", JSON.stringify(todoList));
   setEventsForTodoActions();
   hideAddModal();
-  clearInputs()
+  clearInputs();
 }
 function scrollToTop() {
   todosContainer.scrollTo({
-    top:0,
-    behavior:'smooth',
-  })
+    top: 0,
+    behavior: "smooth",
+  });
 }
 function changeTheme() {
- if (isDark) {
-   isDark = false;
-   localStorage.setItem('theme','light')
-   toggleThemeBtn.firstElementChild.src = 'res/icons/moon.svg'
-   root.style.setProperty('--primary-color','linear-gradient(to bottom right, #72147e, #f21170)')
-   root.style.setProperty('--secondary-color','#fff')
-   root.style.setProperty('--todo-color','#fa9905')
-   root.style.setProperty('--primary-text-color','#000')
-   root.style.setProperty('--secondary-text-color','#fff')
+  if (isDark) {
+    isDark = false;
+    localStorage.setItem("theme", "light");
+    toggleThemeBtn.firstElementChild.src = "res/icons/moon.svg";
+    root.style.setProperty(
+      "--primary-color",
+      "linear-gradient(to bottom right, #72147e, #f21170)"
+    );
+    root.style.setProperty("--secondary-color", "#fff");
+    root.style.setProperty("--todo-color", "#fa9905");
+    root.style.setProperty("--primary-text-color", "#000");
+    root.style.setProperty("--secondary-text-color", "#fff");
   } else {
     isDark = true;
-    localStorage.setItem('theme','dark')
-    toggleThemeBtn.firstElementChild.src = 'res/icons/sun.svg'
-    root.style.setProperty('--primary-color','linear-gradient(to bottom right, #DA0037,#EDEDED )')
-    root.style.setProperty('--secondary-color','#525252')
-    root.style.setProperty('--todo-color','#EC625F')
-    root.style.setProperty('--primary-text-color','#fff')
-    root.style.setProperty('--secondary-text-color','#000')
- }
+    localStorage.setItem("theme", "dark");
+    toggleThemeBtn.firstElementChild.src = "res/icons/sun.svg";
+    root.style.setProperty(
+      "--primary-color",
+      "linear-gradient(to bottom right, #DA0037,#EDEDED )"
+    );
+    root.style.setProperty("--secondary-color", "#525252");
+    root.style.setProperty("--todo-color", "#EC625F");
+    root.style.setProperty("--primary-text-color", "#fff");
+    root.style.setProperty("--secondary-text-color", "#000");
+  }
+}
+function setTheme() {
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
+    isDark = true;
+    toggleThemeBtn.firstElementChild.src = "res/icons/sun.svg";
+    root.style.setProperty(
+      "--primary-color",
+      "linear-gradient(to bottom right, #DA0037,#EDEDED )"
+    );
+    root.style.setProperty("--secondary-color", "#525252");
+    root.style.setProperty("--todo-color", "#EC625F");
+    root.style.setProperty("--primary-text-color", "#fff");
+    root.style.setProperty("--secondary-text-color", "#000");
+  } else {
+    isDark = false;
+    toggleThemeBtn.firstElementChild.src = "res/icons/moon.svg";
+    toggleThemeBtn.firstElementChild.src = "res/icons/moon.svg";
+    root.style.setProperty(
+      "--primary-color",
+      "linear-gradient(to bottom right, #72147e, #f21170)"
+    );
+    root.style.setProperty("--secondary-color", "#fff");
+    root.style.setProperty("--todo-color", "#fa9905");
+    root.style.setProperty("--primary-text-color", "#000");
+    root.style.setProperty("--secondary-text-color", "#fff");
+  }
 }
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setEventsForTodoActions);
+window.addEventListener("load", setTheme);
 addBtn.addEventListener("click", showAddModal);
 todoSubmitBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  addTodoHandler()
+  addTodoHandler();
 });
-todoTitleInput.addEventListener('keydown',function(e) {
-  if (e.key === 'Enter') {
-    e.preventDefault()
-    addTodoHandler()
+todoTitleInput.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    addTodoHandler();
   }
-})
-todoDescriptionInput.addEventListener('keydown',function(e) {
-  if (e.ctrlKey && e.key === 'Enter') {
-    addTodoHandler()
+});
+todoDescriptionInput.addEventListener("keydown", function (e) {
+  if (e.ctrlKey && e.key === "Enter") {
+    addTodoHandler();
   }
-})
+});
 modalCloseBtn.addEventListener("click", hideAddModal);
-modalOverlay.addEventListener('click',hideAddModal)
-$.body.addEventListener('keydown',function(e) {
-  if (e.key === 'Escape') {
-    hideAddModal()
+modalOverlay.addEventListener("click", hideAddModal);
+$.body.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    hideAddModal();
   }
-})
-aboutBtn.addEventListener('click',showAboutModal)
-aboutModalCloseBtn.addEventListener('click',hideAboutModal)
-goToTopBtn.addEventListener('click',scrollToTop)
-toggleThemeBtn.addEventListener('click',changeTheme)
+});
+aboutBtn.addEventListener("click", showAboutModal);
+aboutModalCloseBtn.addEventListener("click", hideAboutModal);
+goToTopBtn.addEventListener("click", scrollToTop);
+toggleThemeBtn.addEventListener("click", changeTheme);
