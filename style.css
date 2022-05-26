@@ -10,11 +10,15 @@
   --primary-text-color:#000;
   --secondary-text-color:#fff;
 }
+@font-face {
+  font-family: Comfortaa;
+  src: url(res/Comfortaa.ttf);
+}
 body,
 button,
 input,
 textarea {
-  font-family: "Comfortaa", cursive;
+  font-family: Comfortaa, cursive;
 }
 body {
   background-color: var(--secondary-color);
