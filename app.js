@@ -95,7 +95,7 @@ function completeTodo(e) {
   let todoList = JSON.parse(localStorage.getItem("todoList"));
   todoList[todoId].isDone = true;
   localStorage.setItem("todoList", JSON.stringify(todoList));
-  e.target.innerHTML = "close";
+  e.target.className = "do_todo fa-solid fa-xmark";
   isDone = true;
 }
 function uncompleteTodo(e) {
@@ -104,7 +104,7 @@ function uncompleteTodo(e) {
   let todoList = JSON.parse(localStorage.getItem("todoList"));
   todoList[todoId].isDone = false;
   localStorage.setItem("todoList", JSON.stringify(todoList));
-  e.target.innerHTML = "done";
+  e.target.className = "do_todo fa-solid fa-check";
   isDone = false;
 }
 function deleteTodo(e) {
