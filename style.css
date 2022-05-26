@@ -42,9 +42,14 @@ body {
   border-radius: 50%;
   color: var(--secondary-text-color);
   font-size: 2rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   position: absolute;
-  top: 88%;
+  top: 85%;
   right: 3%;
 }
 .about_modal,
@@ -157,7 +162,8 @@ textarea {
   justify-content: space-between;
 }
 .todo_actions > * {
-  padding: 0.2rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
   transition: 0.5s;
   border-radius: 50%;
   cursor: pointer;
@@ -185,11 +191,16 @@ textarea {
 }
 .about_modal_btn {
   position: absolute;
-  top: 88%;
+  top: 85%;
   left: 3%;
   font-size: 2rem;
   color: var(--secondary-text-color);
   padding: 1rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   cursor: pointer;
   background-color: #4d77ff;
@@ -237,7 +248,9 @@ textarea {
   .about_modal_btn,
   .add_btn{
     font-size: 3.5rem;
-    top: 85%;
+    top: 83%;
+    width: 100px;
+    height: 100px;
   }
   .go_to_top {
     top: 45%;

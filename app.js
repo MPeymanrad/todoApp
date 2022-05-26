@@ -84,7 +84,7 @@ function createTodoElem(title, id) {
   const todo = $.createElement("div");
   todo.classList.add("todo");
   todo.setAttribute("data-id", id);
-  const todoInners = `<h3 class="todo_title">${title}</h3><div class="todo_actions"><span class="do_todo material-symbols-outlined" title="Complete Todo">done</span><span class="edit_todo material-symbols-outlined" title="Edit Todo">edit</span><span class=" delete_todo material-symbols-outlined" title="Delete Todo">delete</span></div>`;
+  const todoInners = `<h3 class="todo_title">${title}</h3><div class="todo_actions"><i class="do_todo fa-solid fa-check" title="Complete Todo"></i><i class="edit_todo fa-solid fa-pen-to-square" title="Edit Todo"></i><i class=" delete_todo fa-solid fa-eraser" title="Delete Todo"></i></div>`;
   todo.innerHTML = todoInners;
   todosContainer.append(todo);
   return todo;
