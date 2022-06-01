@@ -56,8 +56,8 @@ function goToTodoEditMode(id) {
     return todo.id === id;
   });
 
-  let todoName = todos[todoEditId].title;
-  let todoDes = todos[todoEditId].des;
+  let todoName = todos[todoEditIndex].title;
+  let todoDes = todos[todoEditIndex].des;
   todoTitleInput.value = todoName;
   todoDescriptionInput.value = todoDes;
   isEditing = true;
