@@ -111,7 +111,7 @@ function completeTodo(id) {
   let todoIndex = todos.findIndex(function (todo) {
     return todo.id === id;
   });
-  todos[todoId].isDone = !todos[todoId].isDone;
+  todos[todoIndex].isDone = !todos[todoIndex].isDone;
   setIntoLocalStorage(todos);
   generateTodoElems(todos);
 }
