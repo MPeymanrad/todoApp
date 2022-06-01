@@ -55,22 +55,19 @@ function goToTodoEditMode(id) {
   todoEditIndex =todos.findIndex(function (todo) {
     return todo.id === id;
   });
-  todoToEdit = todoList[todoEditId];
-  let todoName = todoToEdit.title;
-  let todoDes = todoToEdit.des;
+
+  let todoName = todos[todoEditId].title;
+  let todoDes = todos[todoEditId].des;
   todoTitleInput.value = todoName;
   todoDescriptionInput.value = todoDes;
   isEditing = true;
   showAddModal();
 }
 function editTodo() {
-  let todoList = JSON.parse(localStorage.getItem("todoList"));
-  todoToEdit.title = todoTitleInput.value;
-  todoToEdit.des = todoDescriptionInput.value;
-  todoList[todoEditId] = todoToEdit;
-  localStorage.setItem("todoList", JSON.stringify(todoList));
-  let editingTodoTitle = $.querySelector(`.todo[data-id="${todoEditId}"] h3`);
-  editingTodoTitle.innerHTML = todoTitleInput.value;
+  todos[todoEditIndex].title = todoTitleInput.value;
+  todos[todoEditIndex].des = todoDescriptionInput.value;
+  setIntoLocalStorage(todos)
+  generateTodoElems(todos)
   hideAddModal();
   isEditing = false;
 }
