@@ -119,28 +119,8 @@ function deleteTodo(id) {
   setIntoLocalStorage(todos);
   generateTodoElems(todos);
 }
-function setEventsForTodoActions() {
-  const doTodoElems = $.querySelectorAll(".do_todo");
-  const editTodoElems = $.querySelectorAll(".edit_todo");
-  const delTodoElems = $.querySelectorAll(".delete_todo");
-  doTodoElems.forEach(function (item) {
-    item.addEventListener("click", function (e) {
-      if (!isDone) {
-        completeTodo(e);
-      } else {
-        uncompleteTodo(e);
-      }
-    });
-  });
-  editTodoElems.forEach(function (item) {
-    item.addEventListener("click", goToTodoEditMode);
-  });
-  delTodoElems.forEach(function (item) {
-    item.addEventListener("click", deleteTodo);
-  });
-}
 function addTodoHandler() {
-  if (todoTitleInput.value) {
+  if (todoTitleInput.value.trim()) {
     if (isEditing) {
       editTodo();
     } else {
@@ -151,17 +131,17 @@ function addTodoHandler() {
   }
 }
 function addTodo() {
-  const todoList = JSON.parse(localStorage.getItem("todoList"));
+  let titleValue = todoTitleInput.value.trim();
+  let desValue = todoDescriptionInput.value.trim();
   const newNoteObj = {
-    id: todoList.length,
-    title: todoTitleInput.value,
-    des: todoDescriptionInput.value,
+    id: todos.length + 1,
+    title: titleValue,
+    des: desValue,
     isDone: false,
   };
-  createTodoElem(todoTitleInput.value, todoList.length);
-  todoList.push(newNoteObj);
-  localStorage.setItem("todoList", JSON.stringify(todoList));
-  setEventsForTodoActions();
+  todos.push(newNoteObj);
+  setIntoLocalStorage(todos);
+  generateTodoElems(todos);
   hideAddModal();
   clearInputs();
 }
