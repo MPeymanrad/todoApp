@@ -76,7 +76,7 @@ function generateTodoElems(todos) {
 
   todos.forEach(function (todo) {
     todoElem = $.createElement("div");
-    todoElem.classList.add("todo");
+    todoElem.className = todo.isDone ? "todo_title" : "todo_title complete";
     todoHeading = $.createElement("h3");
     todoHeading.textContent = todo.title;
     todoHeading.classList.add("todo_title");
@@ -88,7 +88,9 @@ function generateTodoElems(todos) {
       completeTodo(todo.id);
     });
     editBtn = $.createElement("i");
-    editBtn.className = "edit_todo fa-solid fa-pen-to-square";
+    editBtn.className = todo.isDone
+      ? "edit_todo fa-solid fa-pen-to-square"
+      : "edit_todo fa-solid fa-xmark";
     editBtn.addEventListener("click", function () {
       goToTodoEditMode(todo.id);
     });
@@ -101,13 +103,12 @@ function generateTodoElems(todos) {
   // const todoInners = `<h3 class="todo_title">${title}</h3><div class="todo_actions"><i class="do_todo fa-solid fa-check" title="Complete Todo"></i><i class="edit_todo fa-solid fa-pen-to-square" title="Edit Todo"></i><i class=" delete_todo fa-solid fa-eraser" title="Delete Todo"></i></div>`;
 }
 function completeTodo(id) {
-  let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
-  e.target.parentElement.parentElement.classList.add("complete");
-  let todoList = JSON.parse(localStorage.getItem("todoList"));
-  todoList[todoId].isDone = true;
-  localStorage.setItem("todoList", JSON.stringify(todoList));
-  e.target.className = "do_todo fa-solid fa-xmark";
-  isDone = true;
+  let todoIndex = todos.findIndex(function (todo) {
+    return todo.id === id;
+  });
+  todos[todoId].isDone = true;
+  setIntoLocalStorage(todos);
+  generateTodoElems(todos);
 }
 function uncompleteTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
