@@ -73,19 +73,20 @@ function editTodo() {
 }
 function generateTodoElems(todos) {
   let todoElem, todoHeading, todoActionContainer, doBtn, editBtn, delBtn;
-
+  todosContainer.innerHTML = ''
   todos.forEach(function (todo) {
     todoElem = $.createElement("div");
-    todoElem.className = todo.isDone ? "todo_title" : "todo_title complete";
+    todoElem.classList.add('todo')
     todoHeading = $.createElement("h3");
+    todoHeading.className = todo.isDone ? "todo_title complete" : "todo_title ";
     todoHeading.textContent = todo.title;
     todoHeading.classList.add("todo_title");
     todoActionContainer = $.createElement("div");
     todoActionContainer.classList.add("todo_actions");
     doBtn = $.createElement("i");
     doBtn.className = todo.isDone
-      ? "edit_todo fa-solid fa-check"
-      : "edit_todo fa-solid fa-xmark";
+      ? "do_todo fa-solid fa-xmark"
+      : "do_todo fa-solid fa-check";
     doBtn.addEventListener("click", function () {
       completeTodo(todo.id);
     });
@@ -100,6 +101,9 @@ function generateTodoElems(todos) {
     delBtn.addEventListener("click", function () {
       deleteTodo(todo.id);
     });
+    todoActionContainer.append(doBtn,editBtn,delBtn)
+    todoElem.append(todoHeading,todoActionContainer);
+    todosContainer.append(todoElem)
   });
   // const todoInners = `<h3 class="todo_title">${title}</h3><div class="todo_actions"><i class="do_todo fa-solid fa-check" title="Complete Todo"></i><i class="edit_todo fa-solid fa-pen-to-square" title="Edit Todo"></i><i class=" delete_todo fa-solid fa-eraser" title="Delete Todo"></i></div>`;
 }
@@ -209,7 +213,6 @@ function setIntoLocalStorage(todosArr) {
   localStorage.setItem("todos", JSON.stringify(todosArr));
 }
 window.addEventListener("load", loadTodos);
-window.addEventListener("load", setEventsForTodoActions);
 window.addEventListener("load", setTheme);
 addBtn.addEventListener("click", showAddModal);
 todoSubmitBtn.addEventListener("click", function (e) {
