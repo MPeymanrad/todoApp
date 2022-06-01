@@ -15,6 +15,7 @@ const todoDescriptionInput = $.getElementById("todo_description_input");
 const modalCloseBtn = $.querySelector(".close_btn");
 const todoSubmitBtn = $.querySelector(".add_todo_btn");
 
+let todos = [];
 let isDark = false;
 let isEditing = false;
 let todoEditId;
@@ -43,19 +44,11 @@ function clearInputs() {
   todoDescriptionInput.value = "";
 }
 function loadTodos() {
-  if (!localStorage.getItem("todoList")) {
-    localStorage.setItem("todoList", JSON.stringify([]));
-  }
-  let todoList = JSON.parse(localStorage.getItem("todoList"));
-  for (let i = 0; i < todoList.length; i++) {
-    todoList[i].id = i;
-    let currentTodoElem = createTodoElem(todoList[i].title, todoList[i].id);
-    if (todoList[i].isDone) {
-      currentTodoElem.classList.add("complete");
-      currentTodoElem.firstChild.nextSibling.firstChild.innerHTML = "close";
-    }
-  }
-  localStorage.setItem("todoList", JSON.stringify(todoList));
+const localStorageTodos =JSON.parse(localStorage.getItem('todos'))
+if (localStorageTodos) {
+  todos = localStorageTodos;
+  generateTodoElems(todos)
+} 
 }
 function goToTodoEditMode(e) {
   //get data from local storage...
