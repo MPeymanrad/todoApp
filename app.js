@@ -83,14 +83,15 @@ function generateTodoElems(todos) {
     todoActionContainer = $.createElement("div");
     todoActionContainer.classList.add("todo_actions");
     doBtn = $.createElement("i");
-    doBtn.className = "do_todo fa-solid fa-check";
+    doBtn.className = todo.isDone
+      ? "edit_todo fa-solid fa-check"
+      : "edit_todo fa-solid fa-xmark";
     doBtn.addEventListener("click", function () {
       completeTodo(todo.id);
     });
+
     editBtn = $.createElement("i");
-    editBtn.className = todo.isDone
-      ? "edit_todo fa-solid fa-pen-to-square"
-      : "edit_todo fa-solid fa-xmark";
+    editBtn.className = "edit_todo fa-solid fa-pen-to-square";
     editBtn.addEventListener("click", function () {
       goToTodoEditMode(todo.id);
     });
@@ -106,18 +107,9 @@ function completeTodo(id) {
   let todoIndex = todos.findIndex(function (todo) {
     return todo.id === id;
   });
-  todos[todoId].isDone = true;
+  todos[todoId].isDone = !todos[todoId].isDone;
   setIntoLocalStorage(todos);
   generateTodoElems(todos);
-}
-function uncompleteTodo(e) {
-  let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
-  e.target.parentElement.parentElement.classList.remove("complete");
-  let todoList = JSON.parse(localStorage.getItem("todoList"));
-  todoList[todoId].isDone = false;
-  localStorage.setItem("todoList", JSON.stringify(todoList));
-  e.target.className = "do_todo fa-solid fa-check";
-  isDone = false;
 }
 function deleteTodo(e) {
   let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
