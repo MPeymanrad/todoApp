@@ -111,17 +111,13 @@ function completeTodo(id) {
   setIntoLocalStorage(todos);
   generateTodoElems(todos);
 }
-function deleteTodo(e) {
-  let todoId = e.target.parentElement.parentElement.getAttribute("data-id");
-  e.target.parentElement.parentElement.remove();
-  let todoList = JSON.parse(localStorage.getItem("todoList"));
-  todoList.splice(todoId, 1);
-  let todoElems = $.getElementsByClassName("todo");
-  for (let i = 0; i < todoList.length; i++) {
-    todoList[i].id = i;
-    todoElems[i].setAttribute("data-id", i);
-  }
-  localStorage.setItem("todoList", JSON.stringify(todoList));
+function deleteTodo(id) {
+  let todoIndex = todos.findIndex(function (todo) {
+    return todo.id === id;
+  });
+  todos.splice(todoIndex, 1);
+  setIntoLocalStorage(todos);
+  generateTodoElems(todos);
 }
 function setEventsForTodoActions() {
   const doTodoElems = $.querySelectorAll(".do_todo");
