@@ -18,7 +18,7 @@ const todoSubmitBtn = $.querySelector(".add_todo_btn");
 let todos = [];
 let isDark = false;
 let isEditing = false;
-let todoEditId;
+let todoEditIndex;
 let todoToEdit;
 let isDone;
 function showAddModal() {
@@ -50,10 +50,11 @@ if (localStorageTodos) {
   generateTodoElems(todos)
 } 
 }
-function goToTodoEditMode(e) {
+function goToTodoEditMode(id) {
   //get data from local storage...
-  todoEditId = e.target.parentElement.parentElement.getAttribute("data-id");
-  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  todoEditIndex =todos.findIndex(function (todo) {
+    return todo.id === id;
+  });
   todoToEdit = todoList[todoEditId];
   let todoName = todoToEdit.title;
   let todoDes = todoToEdit.des;
@@ -217,6 +218,9 @@ function setTheme() {
     root.style.setProperty("--primary-text-color", "#000");
     root.style.setProperty("--secondary-text-color", "#fff");
   }
+}
+function setIntoLocalStorage(todosArr) {
+  localStorage.setItem('todos',JSON.stringify(todosArr))
 }
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setEventsForTodoActions);
