@@ -13,12 +13,12 @@ const todoTitleInput = $.getElementById("todo_title_input");
 const todoDescriptionInput = $.getElementById("todo_description_input");
 const modalCloseBtn = $.querySelector(".close_btn");
 const todoSubmitBtn = $.querySelector(".add_todo_btn");
-const todoModal = $.querySelector('.todo_modal');
-const todoModalCloseBtn = $.querySelector('.todo_close_btn');
-const todoDetailTitleSpan = $.querySelector('#title_span');
-const todoDetailDesSpan = $.querySelector('#des_span');
-const todoDetailIsDoneSpan = $.querySelector('#done_span');
-const todoDetailDateSpan = $.querySelector('#date_span');
+const todoModal = $.querySelector(".todo_modal");
+const todoModalCloseBtn = $.querySelector(".todo_close_btn");
+const todoDetailTitleSpan = $.querySelector("#title_span");
+const todoDetailDesSpan = $.querySelector("#des_span");
+const todoDetailIsDoneSpan = $.querySelector("#done_span");
+const todoDetailDateSpan = $.querySelector("#date_span");
 
 let todos = [];
 let isDark = false;
@@ -68,10 +68,10 @@ function editTodo() {
 }
 function generateTodoElems(todos) {
   let todoElem, todoHeading, todoActionContainer, doBtn, editBtn, delBtn;
-  todosContainer.innerHTML = ''
+  todosContainer.innerHTML = "";
   todos.forEach(function (todo) {
     todoElem = $.createElement("div");
-    todoElem.classList.add('todo')
+    todoElem.classList.add("todo");
     todoHeading = $.createElement("h3");
     todoHeading.className = todo.isDone ? "todo_title complete" : "todo_title ";
     todoHeading.textContent = todo.title;
@@ -96,9 +96,9 @@ function generateTodoElems(todos) {
     delBtn.addEventListener("click", function () {
       deleteTodo(todo.id);
     });
-    todoActionContainer.append(doBtn,editBtn,delBtn)
-    todoElem.append(todoHeading,todoActionContainer);
-    todosContainer.append(todoElem)
+    todoActionContainer.append(doBtn, editBtn, delBtn);
+    todoElem.append(todoHeading, todoActionContainer);
+    todosContainer.append(todoElem);
   });
 }
 function completeTodo(id) {
@@ -131,16 +131,25 @@ function addTodoHandler() {
 function addTodo() {
   let titleValue = todoTitleInput.value.trim();
   let desValue = todoDescriptionInput.value.trim();
+  let date = new Date();
+  let todoDate = {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    day: date.getDate(),
+    hour: date.getHours(),
+    min: date.getMinutes(),
+  };
   const newNoteObj = {
     id: todos.length + 1,
     title: titleValue,
     des: desValue,
+    dateCreated: todoDate,
     isDone: false,
   };
   todos.push(newNoteObj);
   setIntoLocalStorage(todos);
   generateTodoElems(todos);
-  hideAddModal();
+  hideModal(addModal);
   clearInputs();
 }
 function scrollToTop() {
@@ -209,9 +218,8 @@ function setIntoLocalStorage(todosArr) {
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setTheme);
 addBtn.addEventListener("click", function () {
-  showModal(addModal)
-}
-);
+  showModal(addModal);
+});
 todoSubmitBtn.addEventListener("click", function (e) {
   e.preventDefault();
   addTodoHandler();
@@ -244,7 +252,7 @@ aboutBtn.addEventListener("click", function () {
   showModal(aboutModal);
 });
 aboutModalCloseBtn.addEventListener("click", function () {
-  hideModal(aboutModal)
+  hideModal(aboutModal);
 });
 goToTopBtn.addEventListener("click", scrollToTop);
 toggleThemeBtn.addEventListener("click", changeTheme);
