@@ -21,22 +21,12 @@ let isEditing = false;
 let todoEditIndex;
 let todoToEdit;
 let isDone;
-function showAddModal() {
-  todoTitleInput.focus();
-  addModal.style.top = "20%";
+function showModal(modal) {
+  modal.style.top = "20%";
   modalOverlay.style.display = "block";
 }
-function hideAddModal() {
-  addModal.style.top = "-100%";
-  modalOverlay.style.display = "none";
-}
-function showAboutModal() {
-  aboutModal.style.top = "20%";
-  modalOverlay.style.display = "block";
-}
-
-function hideAboutModal() {
-  aboutModal.style.top = "-100%";
+function hideModal(modal) {
+  modal.style.top = "-100%";
   modalOverlay.style.display = "none";
 }
 function clearInputs() {
@@ -214,7 +204,10 @@ function setIntoLocalStorage(todosArr) {
 }
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setTheme);
-addBtn.addEventListener("click", showAddModal);
+addBtn.addEventListener("click", function () {
+  showModal(addModal)
+}
+);
 todoSubmitBtn.addEventListener("click", function (e) {
   e.preventDefault();
   addTodoHandler();
@@ -230,18 +223,24 @@ todoDescriptionInput.addEventListener("keydown", function (e) {
     addTodoHandler();
   }
 });
-modalCloseBtn.addEventListener("click", hideAddModal);
+modalCloseBtn.addEventListener("click", function () {
+  hideModal(addModal);
+});
 modalOverlay.addEventListener("click", function () {
-  hideAddModal();
-  hideAboutModal();
+  hideModal(addModal);
+  hideModal(aboutModal);
 });
 $.body.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
-    hideAddModal();
-    hideAboutModal();
+    hideModal(addModal);
+    hideModal(aboutModal);
   }
 });
-aboutBtn.addEventListener("click", showAboutModal);
-aboutModalCloseBtn.addEventListener("click", hideAboutModal);
+aboutBtn.addEventListener("click", function () {
+  showModal(aboutModal);
+});
+aboutModalCloseBtn.addEventListener("click", function () {
+  hideModal(aboutModal)
+});
 goToTopBtn.addEventListener("click", scrollToTop);
 toggleThemeBtn.addEventListener("click", changeTheme);
