@@ -9,11 +9,16 @@ const aboutBtn = $.querySelector(".about_modal_btn");
 const aboutModal = $.querySelector(".about_modal");
 const aboutModalCloseBtn = $.querySelector(".about_close_btn");
 const goToTopBtn = $.querySelector(".go_to_top");
-//add modal elements
 const todoTitleInput = $.getElementById("todo_title_input");
 const todoDescriptionInput = $.getElementById("todo_description_input");
 const modalCloseBtn = $.querySelector(".close_btn");
 const todoSubmitBtn = $.querySelector(".add_todo_btn");
+const todoModal = $.querySelector('.todo_modal');
+const todoModalCloseBtn = $.querySelector('.todo_close_btn');
+const todoDetailTitleSpan = $.querySelector('#title_span');
+const todoDetailDesSpan = $.querySelector('#des_span');
+const todoDetailIsDoneSpan = $.querySelector('#done_span');
+const todoDetailDateSpan = $.querySelector('#date_span');
 
 let todos = [];
 let isDark = false;
@@ -95,7 +100,6 @@ function generateTodoElems(todos) {
     todoElem.append(todoHeading,todoActionContainer);
     todosContainer.append(todoElem)
   });
-  // const todoInners = `<h3 class="todo_title">${title}</h3><div class="todo_actions"><i class="do_todo fa-solid fa-check" title="Complete Todo"></i><i class="edit_todo fa-solid fa-pen-to-square" title="Edit Todo"></i><i class=" delete_todo fa-solid fa-eraser" title="Delete Todo"></i></div>`;
 }
 function completeTodo(id) {
   let todoIndex = todos.findIndex(function (todo) {
