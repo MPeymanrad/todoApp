@@ -57,7 +57,9 @@ body {
   right: 3%;
 }
 .about_modal,
-.add_modal {
+.add_modal,
+.todo_modal
+ {
   background-color: var(--secondary-color);
   color: var(--primary-text-color);
   width: 95%;
@@ -94,7 +96,9 @@ body {
   font-weight: 700;
 }
 .about_close_btn,
-.close_btn {
+.close_btn,
+.todo_close_btn
+ {
   cursor: pointer;
   color: #f00;
   position: absolute;
@@ -102,6 +106,20 @@ body {
   right: 3%;
   font-size: 2rem;
   font-weight: 700;
+}
+.todo_modal {
+  font-size: 1.2rem;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+.modal_group {
+  margin: 10px 0;
+}
+.modal_group label {
+  font-weight: 900;
 }
 .add_form {
   padding-top: 1.5rem;
@@ -261,7 +279,9 @@ textarea {
     right: 3%;
   }
   .about_close_btn,
-  .close_btn {
+  .close_btn,
+  .todo_close_btn
+   {
     font-size: 3rem;
   }
   .add_form > *{
@@ -288,7 +308,9 @@ textarea {
     width: 40%;
   }
   .add_modal,
-  .about_modal {
+  .about_modal,
+  .todo_modal
+  {
     width: 80%;
     left: 10%;
     right: 10%;
