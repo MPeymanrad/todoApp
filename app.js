@@ -26,6 +26,20 @@ let isEditing = false;
 let todoEditIndex;
 let todoToEdit;
 let isDone;
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 function showModal(modal) {
   modal.style.top = "20%";
   modalOverlay.style.display = "block";
@@ -98,6 +112,9 @@ function generateTodoElems(todos) {
     });
     todoActionContainer.append(doBtn, editBtn, delBtn);
     todoElem.append(todoHeading, todoActionContainer);
+    todoElem.addEventListener("click", function () {
+      showTodoDetails(todo.id);
+    });
     todosContainer.append(todoElem);
   });
 }
@@ -151,6 +168,21 @@ function addTodo() {
   generateTodoElems(todos);
   hideModal(addModal);
   clearInputs();
+}
+function showTodoDetails(todoId) {
+  let targetTodo = todos.find(function (todo) {
+    return todo.id === todoId;
+  });
+  let todoDate = targetTodo.dateCreated;
+  const todoCreateDate = `${todoDate.year} , ${months[todoDate.month]} ${
+    todoDate.day
+  }th , ${todoDate.hour} : ${todoDate.min}`;
+  todoDetailTitleSpan.textContent = targetTodo.title;
+  todoDetailDesSpan.textContent = targetTodo.des;
+  todoDetailIsDoneSpan.textContent = targetTodo.isDone ? "Yes" : "No";
+
+  todoDetailDateSpan.textContent = todoCreateDate;
+  showModal(todoModal);
 }
 function scrollToTop() {
   todosContainer.scrollTo({
