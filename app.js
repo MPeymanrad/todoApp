@@ -273,11 +273,13 @@ modalCloseBtn.addEventListener("click", function () {
 modalOverlay.addEventListener("click", function () {
   hideModal(addModal);
   hideModal(aboutModal);
+  hideModal(todoModal)
 });
 $.body.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     hideModal(addModal);
     hideModal(aboutModal);
+    hideModal(todoModal)
   }
 });
 aboutBtn.addEventListener("click", function () {
@@ -288,3 +290,6 @@ aboutModalCloseBtn.addEventListener("click", function () {
 });
 goToTopBtn.addEventListener("click", scrollToTop);
 toggleThemeBtn.addEventListener("click", changeTheme);
+todoModalCloseBtn.addEventListener('click',function () {
+  hideModal(todoModal)
+})
