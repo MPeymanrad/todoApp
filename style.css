@@ -174,7 +174,6 @@ textarea {
   overflow: auto;
 }
 .todo {
-  cursor: pointer;
   margin: 10px auto;
   background-color: var(--todo-color);
   padding: 1rem;
@@ -253,6 +252,9 @@ textarea {
 .toggle_theme img {
   width: 50px;
   height: 50px;
+}
+.todo_title {
+  cursor: pointer;
 }
 @media only screen and (min-width: 768px) {
   .title {

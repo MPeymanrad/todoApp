@@ -70,14 +70,14 @@ function goToTodoEditMode(id) {
   todoTitleInput.value = todoName;
   todoDescriptionInput.value = todoDes;
   isEditing = true;
-  showAddModal();
+  showModal(addModal);
 }
 function editTodo() {
   todos[todoEditIndex].title = todoTitleInput.value;
   todos[todoEditIndex].des = todoDescriptionInput.value;
   setIntoLocalStorage(todos);
   generateTodoElems(todos);
-  hideAddModal();
+  hideModal(addModal);
   isEditing = false;
 }
 function generateTodoElems(todos) {
@@ -90,6 +90,9 @@ function generateTodoElems(todos) {
     todoHeading.className = todo.isDone ? "todo_title complete" : "todo_title ";
     todoHeading.textContent = todo.title;
     todoHeading.classList.add("todo_title");
+    todoHeading.addEventListener("click", function (e) {
+      showTodoDetails(todo.id);
+    });
     todoActionContainer = $.createElement("div");
     todoActionContainer.classList.add("todo_actions");
     doBtn = $.createElement("i");
@@ -112,9 +115,7 @@ function generateTodoElems(todos) {
     });
     todoActionContainer.append(doBtn, editBtn, delBtn);
     todoElem.append(todoHeading, todoActionContainer);
-    todoElem.addEventListener("click", function () {
-      showTodoDetails(todo.id);
-    });
+
     todosContainer.append(todoElem);
   });
 }
@@ -273,13 +274,13 @@ modalCloseBtn.addEventListener("click", function () {
 modalOverlay.addEventListener("click", function () {
   hideModal(addModal);
   hideModal(aboutModal);
-  hideModal(todoModal)
+  hideModal(todoModal);
 });
 $.body.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     hideModal(addModal);
     hideModal(aboutModal);
-    hideModal(todoModal)
+    hideModal(todoModal);
   }
 });
 aboutBtn.addEventListener("click", function () {
@@ -290,6 +291,6 @@ aboutModalCloseBtn.addEventListener("click", function () {
 });
 goToTopBtn.addEventListener("click", scrollToTop);
 toggleThemeBtn.addEventListener("click", changeTheme);
-todoModalCloseBtn.addEventListener('click',function () {
-  hideModal(todoModal)
-})
+todoModalCloseBtn.addEventListener("click", function () {
+  hideModal(todoModal);
+});
