@@ -81,8 +81,9 @@ function editTodo() {
   isEditing = false;
 }
 function generateTodoElems(todos) {
-  let todoElem, todoHeading, todoActionContainer, doBtn, editBtn, delBtn;
+  let todoElem, todoHeading, todoActionContainer, doBtn, editBtn, delBtn,todoFragment;
   todosContainer.innerHTML = "";
+  todoFragment = $.createDocumentFragment();
   todos.forEach(function (todo) {
     todoElem = $.createElement("div");
     todoElem.classList.add("todo");
@@ -115,9 +116,9 @@ function generateTodoElems(todos) {
     });
     todoActionContainer.append(doBtn, editBtn, delBtn);
     todoElem.append(todoHeading, todoActionContainer);
-
-    todosContainer.append(todoElem);
+    todoFragment.append(todoElem);
   });
+  todosContainer.append(todoFragment);
 }
 function completeTodo(id) {
   let todoIndex = todos.findIndex(function (todo) {
