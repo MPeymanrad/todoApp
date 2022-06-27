@@ -81,7 +81,7 @@ function editTodo() {
   isEditing = false;
 }
 function generateTodoElems(todos) {
-  let todoElem, todoHeading, todoActionContainer, doBtn, editBtn, delBtn,todoFragment;
+  let todoElem, todoHeading, todoActionContainer, doBtn, editBtn, delBtn, todoFragment;
   todosContainer.innerHTML = "";
   todoFragment = $.createDocumentFragment();
   todos.forEach(function (todo) {
@@ -91,9 +91,7 @@ function generateTodoElems(todos) {
     todoHeading.className = todo.isDone ? "todo_title complete" : "todo_title ";
     todoHeading.textContent = todo.title;
     todoHeading.classList.add("todo_title");
-    todoHeading.addEventListener("click", function (e) {
-      showTodoDetails(todo.id);
-    });
+
     todoActionContainer = $.createElement("div");
     todoActionContainer.classList.add("todo_actions");
     doBtn = $.createElement("i");
@@ -114,6 +112,11 @@ function generateTodoElems(todos) {
     delBtn.addEventListener("click", function () {
       deleteTodo(todo.id);
     });
+    todoElem.addEventListener("click", function (e) {
+      if (e.target.tagName === "DIV" || e.target.tagName === "H3") {
+        showTodoDetails(todo.id);
+      }
+    })
     todoActionContainer.append(doBtn, editBtn, delBtn);
     todoElem.append(todoHeading, todoActionContainer);
     todoFragment.append(todoElem);
@@ -176,9 +179,8 @@ function showTodoDetails(todoId) {
     return todo.id === todoId;
   });
   let todoDate = targetTodo.dateCreated;
-  const todoCreateDate = `${todoDate.year} , ${months[todoDate.month]} ${
-    todoDate.day
-  }th , ${todoDate.hour} : ${todoDate.min}`;
+  const todoCreateDate = `${todoDate.year} , ${months[todoDate.month]} ${todoDate.day
+    }th , ${todoDate.hour} : ${todoDate.min}`;
   todoDetailTitleSpan.textContent = targetTodo.title;
   todoDetailDesSpan.textContent = targetTodo.des;
   todoDetailIsDoneSpan.textContent = targetTodo.isDone ? "Yes" : "No";
