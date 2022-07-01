@@ -79,44 +79,30 @@ function editTodo() {
   isEditing = false;
 }
 function generateTodoElems(todos) {
-  let todoElem, todoHeading, todoActionContainer, doBtn, editBtn, delBtn, todoFragment;
+  let todoElem, todoFragment;
   todosContainer.innerHTML = "";
   todoFragment = $.createDocumentFragment();
   todos.forEach(function (todo) {
     todoElem = $.createElement("div");
     todoElem.classList.add("todo");
-    todoHeading = $.createElement("h3");
-    todoHeading.className = todo.isDone ? "todo_title complete" : "todo_title ";
-    todoHeading.textContent = todo.title;
-    todoHeading.classList.add("todo_title");
-
-    todoActionContainer = $.createElement("div");
-    todoActionContainer.classList.add("todo_actions");
-    doBtn = $.createElement("i");
-    doBtn.className = todo.isDone
-      ? "do_todo fa-solid fa-xmark"
-      : "do_todo fa-solid fa-check";
-    doBtn.addEventListener("click", function () {
-      completeTodo(todo.id);
-    });
-
-    editBtn = $.createElement("i");
-    editBtn.className = "edit_todo fa-solid fa-pen-to-square";
-    editBtn.addEventListener("click", function () {
-      goToTodoEditMode(todo.id);
-    });
-    delBtn = $.createElement("i");
-    delBtn.className = "delete_todo fa-solid fa-eraser";
-    delBtn.addEventListener("click", function () {
-      deleteTodo(todo.id);
-    });
     todoElem.addEventListener("click", function (e) {
       if (e.target.tagName === "DIV" || e.target.tagName === "H3") {
         showTodoDetails(todo.id);
+      } else {
+        switch (e.target.classList[0]) {
+          case "edit_todo":
+            goToTodoEditMode(todo.id);
+            break;
+          case "do_todo":
+            completeTodo(todo.id)
+            break;
+          case "delete_todo":
+            deleteTodo(todo.id)
+            break;
+        }
       }
     })
-    todoActionContainer.append(doBtn, editBtn, delBtn);
-    todoElem.append(todoHeading, todoActionContainer);
+    todoElem.insertAdjacentHTML("beforeend", `<h3 class="${todo.isDone ? "todo_title complete" : "todo_title"}">${todo.title}</h3><div class="todo_actions"><i class="do_todo fa-solid ${todo.isDone ? "fa-xmark" : "fa-check"}"></i><i class="edit_todo fa-solid fa-pen-to-square"></i><i class="delete_todo fa-solid fa-eraser"></i></div>`)
     todoFragment.append(todoElem);
   });
   todosContainer.append(todoFragment);
