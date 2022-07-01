@@ -61,9 +61,7 @@ function loadTodos() {
 }
 function goToTodoEditMode(id) {
   //get data from local storage...
-  todoEditIndex = todos.findIndex(function (todo) {
-    return todo.id === id;
-  });
+  todoEditIndex = todos.findIndex(todo => todo.id === id);
 
   let todoName = todos[todoEditIndex].title;
   let todoDes = todos[todoEditIndex].des;
@@ -124,17 +122,13 @@ function generateTodoElems(todos) {
   todosContainer.append(todoFragment);
 }
 function completeTodo(id) {
-  let todoIndex = todos.findIndex(function (todo) {
-    return todo.id === id;
-  });
+  let todoIndex = todos.findIndex(todo => todo.id === id);
   todos[todoIndex].isDone = !todos[todoIndex].isDone;
   setIntoLocalStorage(todos);
   generateTodoElems(todos);
 }
 function deleteTodo(id) {
-  let todoIndex = todos.findIndex(function (todo) {
-    return todo.id === id;
-  });
+  let todoIndex = todos.findIndex(todo => todo.id === id);
   todos.splice(todoIndex, 1);
   setIntoLocalStorage(todos);
   generateTodoElems(todos);
@@ -175,9 +169,7 @@ function addTodo() {
   clearInputs();
 }
 function showTodoDetails(todoId) {
-  let targetTodo = todos.find(function (todo) {
-    return todo.id === todoId;
-  });
+  let targetTodo = todos.find(todo => todo.id === todoId);
   let todoDate = targetTodo.dateCreated;
   const todoCreateDate = `${todoDate.year} , ${months[todoDate.month]} ${todoDate.day
     }th , ${todoDate.hour} : ${todoDate.min}`;
@@ -253,47 +245,37 @@ function setIntoLocalStorage(todosArr) {
 }
 window.addEventListener("load", loadTodos);
 window.addEventListener("load", setTheme);
-addBtn.addEventListener("click", function () {
-  showModal(addModal);
-});
-todoSubmitBtn.addEventListener("click", function (e) {
+addBtn.addEventListener("click", () => showModal(addModal));
+todoSubmitBtn.addEventListener("click", e => {
   e.preventDefault();
   addTodoHandler();
 });
-todoTitleInput.addEventListener("keydown", function (e) {
+todoTitleInput.addEventListener("keydown", e => {
   if (e.key === "Enter") {
     e.preventDefault();
     addTodoHandler();
   }
 });
-todoDescriptionInput.addEventListener("keydown", function (e) {
+todoDescriptionInput.addEventListener("keydown", e => {
   if (e.ctrlKey && e.key === "Enter") {
     addTodoHandler();
   }
 });
-modalCloseBtn.addEventListener("click", function () {
-  hideModal(addModal);
-});
-modalOverlay.addEventListener("click", function () {
+modalCloseBtn.addEventListener("click", () => hideModal(addModal));
+modalOverlay.addEventListener("click", () => {
   hideModal(addModal);
   hideModal(aboutModal);
   hideModal(todoModal);
 });
-$.body.addEventListener("keydown", function (e) {
+$.body.addEventListener("keydown", e => {
   if (e.key === "Escape") {
     hideModal(addModal);
     hideModal(aboutModal);
     hideModal(todoModal);
   }
 });
-aboutBtn.addEventListener("click", function () {
-  showModal(aboutModal);
-});
-aboutModalCloseBtn.addEventListener("click", function () {
-  hideModal(aboutModal);
-});
+aboutBtn.addEventListener("click", () => showModal(aboutModal));
+aboutModalCloseBtn.addEventListener("click", () => hideModal(aboutModal));
 goToTopBtn.addEventListener("click", scrollToTop);
 toggleThemeBtn.addEventListener("click", changeTheme);
-todoModalCloseBtn.addEventListener("click", function () {
-  hideModal(todoModal);
-});
+todoModalCloseBtn.addEventListener("click", () => hideModal(todoModal));
